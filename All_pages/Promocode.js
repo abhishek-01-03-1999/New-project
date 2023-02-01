@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -9,12 +9,61 @@ import {
   Modal,
   StyleSheet,
   Pressable,
+  FlatList,
 } from 'react-native';
 import Home from './Home';
-import Iicon from 'react-native-vector-icons/AntDesign';
 import Iiicon from 'react-native-vector-icons/Feather';
-const Promocode = ({navigation}) => {
+const Promocode = ({navigation, route}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [issize, setsize] = useState([
+    {
+      id: 1,
+      size: 'S',
+    },
+    {
+      id: 2,
+      size: 'M',
+    },
+    {
+      id: 3,
+      size: 'L',
+    },
+    {
+      id: 4,
+      size: 'XL',
+    },
+    {
+      id: 5,
+      size: 'XXL',
+    },
+  ]);
+  const [isquantity, setquantity] = useState([
+    {
+      id: 1,
+      quantity: '1',
+    },
+    {
+      id: 2,
+      quantity: '2',
+    },
+    {
+      id: 3,
+      quantity: '3',
+    },
+    {
+      id: 4,
+      quantity: '4',
+    },
+    {
+      id: 5,
+      quantity: '5',
+    },
+  ]);
+  const [isopendropdown, opendropdown] = useState(false);
+  const [size, setSize] = useState('M');
+  const [isopenQuandropdown, openQuandropdown] = useState(false);
+  const [quantity, setQuantity] = useState('1');
+  const [price, setPrice] = useState('500');
 
   return (
     <ScrollView>
@@ -36,18 +85,18 @@ const Promocode = ({navigation}) => {
             <Text
               style={{
                 fontWeight: 'bold',
-                fontSize: 16,
+                fontSize: 18,
                 textAlign: 'center',
                 marginVertical: 15,
               }}>
-              Air-conditioner dust filter
+              Plane T-Shart
             </Text>
           </View>
         </View>
         <View>
           <Image
-            style={{width: 360, alignSelf: 'center'}}
-            source={require('../Images/Wood.png')}
+            style={{width: '90%', alignSelf: 'center', marginTop: 20}}
+            source={require('../Images/T-shirts.jpg')}
           />
         </View>
         <View style={{alignSelf: 'center', width: 320}}>
@@ -83,33 +132,32 @@ const Promocode = ({navigation}) => {
           </View>
           <View>
             <Text style={{fontSize: 16, fontWeight: 'bold', height: 40}}>
-              Air-conditioner dust filter
+              {route.params.voucherName.name}
             </Text>
           </View>
-          <View style={{height: 350}}>
+          <View style={{height: 110}}>
             <Text style={{fontSize: 14, fontWeight: '300'}}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing lit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim Lorem ipsum dolor sit amet,
-              consectetuer adipiscing elit, sed diam nonummy nibh euismod
-              tincidunt utoreet dolore magna aliquam erat volutpat. Ut wisi enim
-              ad Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-              diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-              aliquam erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit amet,
-              consectetuer adipiscing elit, sed diam nonummy nibh euismod
-              tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
-              enim ad
+              {route.params.voucherName.body}
             </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: 150,
+              alignSelf: 'center',
+              height: 60,
+            }}>
+            <Text style={{fontSize: 24, fontWeight: 'bold'}}>Price =</Text>
+            <Text style={{fontSize: 24, fontWeight: 'bold'}}> 500 Rs</Text>
           </View>
 
-          <View
-            style={{backgroundColor: '#632E8F', borderRadius: 15, height: 35}}>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(true)}>
-              <Text style={styles.textStyle}>Get promocode</Text>
-            </Pressable>
-          </View>
+          <TouchableOpacity
+            style={{backgroundColor: '#632E8F', borderRadius: 15, height: 35}}
+            onPress={() => setModalVisible(true)}>
+            <Text style={styles.textStyle}>Add to Cart</Text>
+          </TouchableOpacity>
+
           <View style={styles.centeredView}>
             <Modal
               visible={modalVisible}
@@ -117,32 +165,99 @@ const Promocode = ({navigation}) => {
               transparent={true}>
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                  <View style={{height: 60}}>
-                    <Iicon name="checkcircle" size={40} color="#632E8F" />
-                  </View>
-                  <View style={{flexDirection: 'row', height: 70}}>
+                  <View
+                    style={{
+                      width: '100%',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
                     <View>
-                      <Text
-                        style={{
-                          fontSize: 28,
-                          fontWeight: 'bold',
-                          color: '#CD198A',
-                        }}>
-                        UPX8b7
+                      <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+                        size
+                      </Text>
+                      <TouchableOpacity
+                        onPress={() => opendropdown(true)}
+                        style={{width: 40, height: 25, borderWidth: 2}}>
+                        <Text style={{textAlign: 'center', fontWeight: 'bold'}}>
+                          {size}
+                        </Text>
+                      </TouchableOpacity>
+                      {isopendropdown === true ? (
+                        <FlatList
+                          data={issize}
+                          renderItem={({item}) => {
+                            return (
+                              <View
+                                style={{
+                                  width: 40,
+                                  alignItems: 'center',
+                                }}>
+                                <TouchableOpacity
+                                  onPress={() => {
+                                    setSize(item.size);
+                                    opendropdown(false);
+                                  }}>
+                                  <Text>{item.size}</Text>
+                                </TouchableOpacity>
+                              </View>
+                            );
+                          }}
+                        />
+                      ) : null}
+                    </View>
+
+                    <View>
+                      <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                        {price * quantity}
                       </Text>
                     </View>
-                    <View style={{marginLeft: 10}}>
-                      <Iiicon name="copy" size={30} color="#632E8F" />
+
+                    <View>
+                      <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+                        quantity
+                      </Text>
+                      <TouchableOpacity
+                        onPress={() => openQuandropdown(true)}
+                        style={{width: 40, height: 25, borderWidth: 2}}>
+                        <Text style={{textAlign: 'center', fontWeight: 'bold'}}>
+                          {quantity}
+                        </Text>
+                      </TouchableOpacity>
+                      {isopenQuandropdown === true ? (
+                        <FlatList
+                          data={isquantity}
+                          renderItem={({item}) => {
+                            return (
+                              <View
+                                style={{
+                                  width: 40,
+                                  alignItems: 'center',
+                                }}>
+                                <TouchableOpacity
+                                  onPress={() => {
+                                    setQuantity(item.quantity);
+                                    openQuandropdown(false);
+                                  }}>
+                                  <Text>{item.quantity}</Text>
+                                </TouchableOpacity>
+                              </View>
+                            );
+                          }}
+                        />
+                      ) : null}
                     </View>
                   </View>
-                  <View style={{height: 100}}>
-                    <Text style={{fontSize: 18}}>
-                      40 points have been deducted from Total points
-                    </Text>
-                  </View>
-                  <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => navigation.navigate(Home)}>
+
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Cash_status')}
+                    style={{
+                      backgroundColor: '#632E8F',
+                      width: '80%',
+                      borderRadius: 20,
+                      height: 35,
+                      alignSelf: 'center',
+                      marginTop: 20,
+                    }}>
                     <Text
                       style={{
                         color: 'white',
@@ -152,9 +267,9 @@ const Promocode = ({navigation}) => {
                         marginTop: 5,
                         width: 180,
                       }}>
-                      Continue to Home
+                      Continue
                     </Text>
-                  </Pressable>
+                  </TouchableOpacity>
                 </View>
               </View>
             </Modal>
@@ -170,14 +285,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    marginTop: 80,
   },
   modalView: {
-    margin: 20,
+    width: 300,
+    height: 250,
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 25,
-    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

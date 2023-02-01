@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -9,17 +9,33 @@ import {
   Alert,
   TouchableOpacity,
   StyleSheet,
+  FlatList,
 } from 'react-native';
 import Iiicon from 'react-native-vector-icons/EvilIcons';
 import Iicon from 'react-native-vector-icons/Entypo';
 import Header from './header';
 const Home_items = ({navigation, route}) => {
+  const [data, setData] = useState([]);
+
+  const callApi = async () => {
+    const response = await fetch(
+      'https://jsonplaceholder.typicode.com/comments?postId=1',
+    );
+    const result = await response.json();
+    console.log('>>>', result);
+    setData(result);
+  };
+
+  useEffect(() => {
+    callApi();
+  }, []);
+
   return (
     <View style={{backgroundColor: 'white'}}>
       <ScrollView>
         <View>
           <Header
-            title="Vouchers"
+            title="Mens"
             Acon={<Iiicon name="arrow-left" size={40} color="white" />}
             onPress={() => navigation.goBack()}
           />
@@ -57,182 +73,79 @@ const Home_items = ({navigation, route}) => {
             </Text>
           </View>
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Promocode')}
-          activeOpacity={1}>
-          <View style={{flexDirection: 'row', height: 150}}>
-            <View style={{marginHorizontal: 10}}>
-              <Image
-                style={{height: 137, width: 137, borderRadius: 10}}
-                source={require('../Images/Wood.png')}
-              />
-            </View>
-            <View style={{width: 200}}>
-              <View
-                style={{
-                  width: 60,
-                  height: 20,
-                  backgroundColor: '#632E8F',
-                  borderRadius: 15,
-                  position: 'absolute',
-                  left: 130,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: '#FFFFFF',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}>
-                  18% off
-                </Text>
-              </View>
-              <Text style={{color: '#CD198A', fontSize: 12, marginBottom: 10}}>
-                Deal
-              </Text>
-              <Text style={{fontWeight: '700', fontSize: 12, marginBottom: 10}}>
-                Air-conditioner dust filter
-              </Text>
-              <Text style={{color: '#7C7C7C', fontSize: 10, fontWeight: '300'}}>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad
-              </Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Promocode')}
-          activeOpacity={1}>
-          <View style={{flexDirection: 'row', height: 150}}>
-            <View style={{marginHorizontal: 10}}>
-              <Image
-                style={{height: 137, width: 137, borderRadius: 10}}
-                source={require('../Images/Detergent.png')}
-              />
-            </View>
-            <View style={{width: 200}}>
-              <View
-                style={{
-                  width: 60,
-                  height: 20,
-                  backgroundColor: '#632E8F',
-                  borderRadius: 15,
-                  position: 'absolute',
-                  left: 130,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: '#FFFFFF',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}>
-                  20% off
-                </Text>
-              </View>
-              <Text style={{color: '#CD198A', fontSize: 12, marginBottom: 10}}>
-                Deal
-              </Text>
-              <Text style={{fontWeight: '700', fontSize: 12, marginBottom: 10}}>
-                Air-conditioner dust filter
-              </Text>
-              <Text style={{color: '#7C7C7C', fontSize: 10, fontWeight: '300'}}>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad
-              </Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Promocode')}
-          activeOpacity={1}>
-          <View style={{flexDirection: 'row', height: 150}}>
-            <View style={{marginHorizontal: 10}}>
-              <Image
-                style={{height: 137, width: 137, borderRadius: 10}}
-                source={require('../Images/Wood.png')}
-              />
-            </View>
-            <View style={{width: 200}}>
-              <View
-                style={{
-                  width: 60,
-                  height: 20,
-                  backgroundColor: '#632E8F',
-                  borderRadius: 15,
-                  position: 'absolute',
-                  left: 130,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: '#FFFFFF',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}>
-                  18% off
-                </Text>
-              </View>
-              <Text style={{color: '#CD198A', fontSize: 12, marginBottom: 10}}>
-                Deal
-              </Text>
-              <Text style={{fontWeight: '700', fontSize: 12, marginBottom: 10}}>
-                Air-conditioner dust filter
-              </Text>
-              <Text style={{color: '#7C7C7C', fontSize: 10, fontWeight: '300'}}>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad
-              </Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Promocode')}
-          activeOpacity={1}>
-          <View style={{flexDirection: 'row', height: 170}}>
-            <View style={{marginHorizontal: 10}}>
-              <Image
-                style={{height: 137, width: 137, borderRadius: 10}}
-                source={require('../Images/Detergent.png')}
-              />
-            </View>
-            <View style={{width: 200}}>
-              <View
-                style={{
-                  width: 60,
-                  height: 20,
-                  backgroundColor: '#632E8F',
-                  borderRadius: 15,
-                  position: 'absolute',
-                  left: 130,
-                }}>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: '#FFFFFF',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}>
-                  20% off
-                </Text>
-              </View>
-              <Text style={{color: '#CD198A', fontSize: 12, marginBottom: 10}}>
-                Deal
-              </Text>
-              <Text style={{fontWeight: '700', fontSize: 12, marginBottom: 10}}>
-                Air-conditioner dust filter
-              </Text>
-              <Text style={{color: '#7C7C7C', fontSize: 10, fontWeight: '300'}}>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat. Ut wisi enim ad
-              </Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+        <View>
+          <FlatList
+            data={data}
+            keyExtractor={(item, index) => index}
+            renderItem={({item, index}) => {
+              return (
+                <View>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('Promocode', {
+                        voucherName: item,
+                      })
+                    }
+                    activeOpacity={1}>
+                    <View style={{flexDirection: 'row', height: 150}}>
+                      <View style={{marginHorizontal: 10}}>
+                        <Image
+                          style={{height: 137, width: 137, borderRadius: 10}}
+                          source={require('../Images/T-shirts.jpg')}
+                        />
+                      </View>
+                      <View style={{width: 200}}>
+                        <View
+                          style={{
+                            width: 60,
+                            height: 20,
+                            backgroundColor: '#632E8F',
+                            borderRadius: 15,
+                            position: 'absolute',
+                            left: 130,
+                          }}>
+                          <Text
+                            style={{
+                              fontSize: 12,
+                              color: '#FFFFFF',
+                              fontWeight: 'bold',
+                              textAlign: 'center',
+                            }}>
+                            18% off
+                          </Text>
+                        </View>
+                        <Text
+                          style={{
+                            color: '#CD198A',
+                            fontSize: 12,
+                            marginBottom: 10,
+                          }}>
+                          Deal
+                        </Text>
+                        <Text
+                          style={{
+                            fontWeight: '700',
+                            fontSize: 12,
+                            marginBottom: 10,
+                          }}>
+                          {item.name}
+                        </Text>
+                        <Text
+                          style={{
+                            color: '#7C7C7C',
+                            fontSize: 10,
+                            fontWeight: '300',
+                          }}>
+                          {item.body}
+                        </Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              );
+            }}
+          />
+        </View>
       </ScrollView>
     </View>
   );

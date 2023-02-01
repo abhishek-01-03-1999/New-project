@@ -9,13 +9,16 @@ import Vouchers from './All_pages/Vouchers';
 import Promocode from './All_pages/Promocode';
 import Home_items from './All_pages/Home_items';
 import Cash_status from './All_pages/Cash_status';
+import Log_In from './All_pages/Log_in';
+import Verification from './All_pages/Verification';
+import Create_Account from './All_pages/Create_Account';
 
 const app = () => {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Log_in"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="reg" component={reg} />
@@ -25,6 +28,9 @@ const app = () => {
         <Stack.Screen name="Promocode" component={Promocode} />
         <Stack.Screen name="Home_items" component={Home_items} />
         <Stack.Screen name="Cash_status" component={Cash_status} />
+        <Stack.Screen name="Log_in" component={Log_In} />
+        <Stack.Screen name="Verification" component={Verification} />
+        <Stack.Screen name="Create_Account" component={Create_Account} />
       </Stack.Navigator>
     </NavigationContainer>
   );

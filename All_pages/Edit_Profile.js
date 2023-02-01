@@ -15,7 +15,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-crop-picker';
 import Iiicon from 'react-native-vector-icons/EvilIcons';
 import Header from './header';
-const Edit_Profile = ({navigation}) => {
+const Edit_Profile = ({navigation, route}) => {
+  console.log(route);
   const [image, setImage] = useState(
     'https://cdn-icons-png.flaticon.com/512/149/149071.png',
   );
@@ -30,7 +31,9 @@ const Edit_Profile = ({navigation}) => {
       setImage(image.path);
     });
   };
-
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
   return (
     <ScrollView>
       <Header
@@ -71,6 +74,19 @@ const Edit_Profile = ({navigation}) => {
           />
         </View>
       </View>
+      <View style={{backgroundColor: 'white'}}>
+        <Text style={{textAlign: 'center', fontSize: 18, fontWeight: 'bold'}}>
+          Welcome
+        </Text>
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: 18,
+            fontWeight: 'bold',
+          }}>
+          {route.params.email}
+        </Text>
+      </View>
       <View
         style={{paddingLeft: 10, paddingRight: 10, backgroundColor: 'white'}}>
         <Text
@@ -105,7 +121,7 @@ const Edit_Profile = ({navigation}) => {
           Phone
         </Text>
         <TextInput
-          onChangeText={text => setEmail(text)}
+          onChangeText={text => setPhone(text)}
           style={{
             borderWidth: 1,
             borderRadius: 30,
@@ -114,14 +130,53 @@ const Edit_Profile = ({navigation}) => {
             height: 42,
             paddingLeft: 20,
             backgroundColor: '#EFEAD8',
-            marginBottom: 120,
+            marginBottom: 20,
           }}
           placeholder={'Phone'}></TextInput>
+
+        <Text
+          style={{
+            fontSize: 15,
+            marginBottom: 10,
+            marginLeft: 20,
+            fontWeight: 'bold',
+          }}>
+          Delivery Address
+        </Text>
+        <TextInput
+          onChangeText={text => setAddress(text)}
+          style={{
+            borderWidth: 1,
+            borderRadius: 30,
+            marginBottom: 20,
+            borderColor: '#D0C9C0',
+            height: 42,
+            paddingLeft: 20,
+            backgroundColor: '#EFEAD8',
+            marginBottom: 80,
+          }}
+          placeholder={'Address'}></TextInput>
       </View>
       <View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('reg', {
+              name: name,
+              phone: phone,
+              address: address,
+              email: route.params.email,
+              image: image,
+            })
+          }
+          style={{
+            height: 80,
+
+            backgroundColor: 'white',
+          }}>
           <Text
             style={{
+              width: '90%',
+              alignSelf: 'center',
               borderRadius: 20,
               fontSize: 15,
               fontWeight: 'bold',

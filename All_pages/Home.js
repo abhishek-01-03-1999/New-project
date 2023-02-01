@@ -16,20 +16,22 @@ import LinearGradient from 'react-native-linear-gradient';
 import Iicon from 'react-native-vector-icons/Entypo';
 import Iiicon from 'react-native-vector-icons/Ionicons';
 import Header from './header';
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
+  console.log(route);
   return (
     <View style={{flex: 1, backgroundColor: '#ddd'}}>
       <ScrollView>
         <Header
           title="Home"
           Acon={<Iicon name="menu" size={40} color="white" />}
-          onPress={() => navigation.navigate('Dashboard')}
+          onPress={() =>
+            navigation.navigate('Dashboard', {
+              email: route.params.email,
+            })
+          }
         />
         <View style={{backgroundColor: 'white', width: '100%'}}>
-          <View style={{marginTop: 100}}>
-            <Image source={require('../Images/Afla_logo.png')} />
-          </View>
-          <View style={{height: 110}}>
+          <View style={{height: 140, marginTop: 30}}>
             <TextInput
               onChangeText={text => setRewards(text)}
               style={{
@@ -38,7 +40,7 @@ const Home = ({navigation}) => {
                 backgroundColor: '#EEF1FF',
                 margin: 15,
               }}
-              placeholder={'Favorite show'}></TextInput>
+              placeholder={'Search Item'}></TextInput>
             <View style={{position: 'absolute'}}>
               <Iicon
                 name="magnifying-glass"
@@ -48,199 +50,59 @@ const Home = ({navigation}) => {
               />
             </View>
           </View>
+          <View style={{}}>
+            <ImageBackground
+              source={require('../Images/dressing.webp')}
+              style={{height: 130, width: 350, alignSelf: 'center'}}>
+              <View
+                style={{
+                  height: 20,
+                  width: 150,
+                  backgroundColor: 'white',
+                  alignSelf: 'center',
+                  marginTop: 120,
+                }}>
+                <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                  Fasion Collection
+                </Text>
+              </View>
+            </ImageBackground>
+          </View>
+
           <View
             style={{
               flexDirection: 'row',
-              height: 30,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: 10,
+              marginTop: 80,
+              height: 60,
             }}>
-            <View
-              style={{
-                alignItems: 'flex-start',
-                marginLeft: 20,
-                justifyContent: 'flex-start',
-                width: 280,
-              }}>
+            <View>
               <Text
                 style={{
-                  fontSize: 14,
+                  fontSize: 18,
+
                   fontWeight: 'bold',
                   color: 'black',
                 }}>
-                Paid Link
+                Categories
               </Text>
             </View>
-            <View
-              style={{
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-              }}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Vouchers')}
+              activeOpacity={1}>
               <Text
                 style={{
                   fontSize: 12,
                   color: '#CB1C8D',
-
                   fontWeight: 'bold',
                 }}>
                 See All
               </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              borderRadius: 10,
-              backgroundColor: 'white',
-              marginHorizontal: '5%',
-              shadowColor: 'black',
-              elevation: 10,
-              flexDirection: 'row',
-              marginTop: '1%',
-            }}>
-            <View
-              style={{
-                borderRadius: 17.5,
-                alignItems: 'flex-start',
-                width: 35,
-                height: 35,
-                marginVertical: '3%',
-                marginLeft: '4%',
-              }}>
-              <LinearGradient
-                start={{x: 1.2, y: 0}}
-                end={{x: 1.2, y: 1}}
-                colors={['#F78A59', '#F9B5D0', 'white']}
-                style={styles.linearGradient}>
-                <Iicon
-                  name="link"
-                  size={22}
-                  color="#632E8F"
-                  style={{margin: '15%'}}
-                />
-              </LinearGradient>
-            </View>
-            <Text
-              style={{
-                fontWeight: '400',
-                fontSize: 16,
-                alignSelf: 'center',
-                marginLeft: '4%',
-                color: '#632E8F',
-              }}>
-              demo-link
-            </Text>
-          </View>
-          <View
-            style={{
-              borderRadius: 10,
-              backgroundColor: 'white',
-              marginHorizontal: '5%',
-              shadowColor: 'black',
-              elevation: 10,
-              flexDirection: 'row',
-              marginTop: '3%',
-            }}>
-            <View
-              style={{
-                borderRadius: 17.5,
-                alignItems: 'flex-start',
-                width: 35,
-                height: 35,
-                marginVertical: '3%',
-                marginLeft: '4%',
-              }}>
-              <LinearGradient
-                start={{x: 1.2, y: 0}}
-                end={{x: 1.2, y: 1}}
-                colors={['#F78A59', '#F9B5D0', 'white']}
-                style={styles.linearGradient}>
-                <Iicon
-                  name="link"
-                  size={22}
-                  color="#632E8F"
-                  style={{margin: '15%'}}
-                />
-              </LinearGradient>
-            </View>
-            <Text
-              style={{
-                fontWeight: '400',
-                fontSize: 16,
-                alignSelf: 'center',
-                marginLeft: '4%',
-                color: '#632E8F',
-              }}>
-              demo-link
-            </Text>
-          </View>
-          <View
-            style={{
-              borderRadius: 10,
-              backgroundColor: 'white',
-              marginHorizontal: '5%',
-              shadowColor: 'black',
-              elevation: 10,
-              flexDirection: 'row',
-              marginVertical: '3%',
-            }}>
-            <View
-              style={{
-                borderRadius: 17.5,
-                alignItems: 'flex-start',
-                width: 35,
-                height: 35,
-                marginVertical: '3%',
-                marginLeft: '4%',
-              }}>
-              <LinearGradient
-                start={{x: 1.2, y: 0}}
-                end={{x: 1.2, y: 1}}
-                colors={['#F78A59', '#F9B5D0', 'white']}
-                style={styles.linearGradient}>
-                <Iicon
-                  name="link"
-                  size={22}
-                  color="#632E8F"
-                  style={{margin: '15%'}}
-                />
-              </LinearGradient>
-            </View>
-            <Text
-              style={{
-                fontWeight: '400',
-                fontSize: 16,
-                alignSelf: 'center',
-                marginLeft: '4%',
-                color: '#632E8F',
-              }}>
-              demo-link
-            </Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text
-              style={{
-                fontSize: 14,
-                marginBottom: '2%',
-                fontWeight: 'bold',
-                color: 'black',
-                margin: '5%',
-              }}>
-              Vouchers
-            </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Vouchers')}
-              activeOpacity={1}>
-              <View style={{marginLeft: 205}}>
-                <Text
-                  style={{
-                    fontSize: 12,
-                    color: '#CB1C8D',
-                    fontWeight: 'bold',
-                  }}>
-                  See All
-                </Text>
-              </View>
             </TouchableOpacity>
           </View>
-          <View style={{width: '100%', flexDirection: 'row', marginBottom: 20}}>
+          <View style={{width: '100%', flexDirection: 'row', height: 166}}>
             <ScrollView horizontal={true}>
               <TouchableOpacity
                 onPress={() =>
@@ -397,7 +259,7 @@ const Home = ({navigation}) => {
                 fontWeight: 'bold',
                 alignSelf: 'center',
               }}>
-              Cash Request
+              My Cart
             </Text>
           </View>
           <View style={{justifyContent: 'center', left: 10}}>

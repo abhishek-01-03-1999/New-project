@@ -33,25 +33,10 @@ const Header = props => {
               fontWeight: 'bold',
               color: 'white',
             }}>
-            Amanda
+            AbhiShop
           </Text>
-          <Text style={{fontSize: 15, color: 'white', marginLeft: '40%'}}>
-            Promo Points
-          </Text>
-        </View>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={{fontSize: 15, marginBottom: 10, color: 'white'}}>
-            amanda@gmail.com
-          </Text>
-          <Text
-            style={{
-              fontSize: 20,
-              marginBottom: 10,
-              fontWeight: 'bold',
-              color: 'white',
-              marginLeft: '40%',
-            }}>
-            100
+          <Text style={{fontSize: 15, color: 'white', marginLeft: '18%'}}>
+            WWW.AbhiShop.com
           </Text>
         </View>
       </LinearGradient>

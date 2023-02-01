@@ -10,37 +10,14 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Iiicon from 'react-native-vector-icons/EvilIcons';
 import Header from './header';
 
-const Reg = ({navigation}) => {
-  const [Name, setName] = useState('');
-  const [Email, setEmail] = useState('');
-  const [Rewards, setRewards] = useState('');
-  const [Credits, setCredits] = useState('');
-  const [UID, setUID] = useState('');
-  const xyz = () => {
-    if (
-      Name.length == 0 ||
-      Email.length == 0 ||
-      Rewards.length == 0 ||
-      Credits.length == 0 ||
-      UID.length == 0
-    ) {
-      Alert.alert(`Enter the Details`);
-    } else {
-      Alert.alert(`Welcome ${Name} `);
-      navigation.navigate('verification', {
-        name: Name,
-        Email: Email,
-        Rewards: Rewards,
-        Credits: Credits,
-        UID: UID,
-      });
-    }
-  };
-
+const Reg = ({navigation, route}) => {
+  console.log(route);
+  const [image, setImage] = useState(
+    'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+  );
   return (
     <ScrollView>
       <Header
@@ -48,132 +25,106 @@ const Reg = ({navigation}) => {
         Acon={<Iiicon name="arrow-left" size={40} color="white" />}
         onPress={() => navigation.goBack()}
       />
-      <View
-        style={{paddingLeft: 10, paddingRight: 10, backgroundColor: '#F7F7F7'}}>
+      <View style={{backgroundColor: 'white'}}>
+        <Image
+          source={{uri: route.params?.image || image}}
+          style={{
+            height: 150,
+            width: 150,
+            alignSelf: 'center',
+            borderRadius: 90,
+            marginTop: 50,
+          }}
+        />
         <Text
           style={{
-            fontSize: 15,
-            marginBottom: 10,
-            marginLeft: 20,
+            textAlign: 'center',
+            fontSize: 18,
             fontWeight: 'bold',
-            marginTop: 40,
+            marginTop: 10,
           }}>
-          Username
+          {route.params?.name}
         </Text>
-        <TextInput
-          onChangeText={text => setName(text)}
-          style={{
-            borderWidth: 1,
-            borderRadius: 30,
-            marginBottom: 20,
-            borderColor: '#D0C9C0',
-            height: 42,
-            paddingLeft: 20,
-            backgroundColor: '#EFEAD8',
-          }}
-          placeholder={'Username'}></TextInput>
-        <Text
-          style={{
-            fontSize: 15,
-            marginBottom: 10,
-            marginLeft: 20,
-            fontWeight: 'bold',
-          }}>
-          Email
-        </Text>
-        <TextInput
-          onChangeText={text => setEmail(text)}
-          style={{
-            borderWidth: 1,
-            borderRadius: 30,
-            marginBottom: 20,
-            borderColor: '#D0C9C0',
-            height: 42,
-            paddingLeft: 20,
-            backgroundColor: '#EFEAD8',
-          }}
-          placeholder={'niteshbiswas@digimonk.in'}></TextInput>
-        <Text
-          style={{
-            fontSize: 15,
-            marginBottom: 10,
-            marginLeft: 20,
-            fontWeight: 'bold',
-          }}>
-          Rewards points
-        </Text>
-        <TextInput
-          onChangeText={text => setRewards(text)}
-          style={{
-            borderWidth: 1,
-            borderRadius: 30,
-            marginBottom: 20,
-            borderColor: '#D0C9C0',
-            height: 42,
-            paddingLeft: 20,
-            backgroundColor: '#EFEAD8',
-          }}
-          placeholder={'niteshbiswas@digimonk.in'}></TextInput>
-        <Text
-          style={{
-            fontSize: 15,
-            marginBottom: 10,
-            marginLeft: 20,
-            fontWeight: 'bold',
-          }}>
-          Credits Accumulated
-        </Text>
-        <TextInput
-          onChangeText={text => setCredits(text)}
-          style={{
-            borderWidth: 1,
-            borderRadius: 30,
-            marginBottom: 20,
-            borderColor: '#D0C9C0',
-            height: 42,
-            paddingLeft: 20,
-            backgroundColor: '#EFEAD8',
-          }}
-          placeholder={'0.00'}></TextInput>
-        <Text
-          style={{
-            fontSize: 15,
-            marginBottom: 10,
-            marginLeft: 20,
-            fontWeight: 'bold',
-          }}>
-          UID
-        </Text>
-        <TextInput
-          onChangeText={text => setUID(text)}
-          style={{
-            borderWidth: 1,
-            borderRadius: 30,
-            marginBottom: 20,
-            borderColor: '#D0C9C0',
-            height: 42,
-            paddingLeft: 20,
-            backgroundColor: '#EFEAD8',
-          }}
-          placeholder={'89'}></TextInput>
-        <View>
-          <TouchableOpacity>
-            <Text
-              style={{
-                borderRadius: 20,
-                fontSize: 15,
-                fontWeight: 'bold',
-                textAlign: 'center',
-                backgroundColor: '#5C2E7E',
-                height: 40,
-                color: 'white',
-                textAlignVertical: 'center',
-                marginTop: 80,
-              }}>
-              Redeem
-            </Text>
-          </TouchableOpacity>
+
+        <View style={{flexDirection: 'row', marginTop: 30}}>
+          <Text
+            style={{
+              width: '24%',
+              fontSize: 18,
+              fontWeight: 'bold',
+            }}>
+            Email:
+          </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              width: '76%',
+              fontWeight: '450',
+            }}>
+            {route.params?.email}
+          </Text>
         </View>
+        <View style={{flexDirection: 'row', marginTop: 20}}>
+          <Text
+            style={{
+              width: '24%',
+              fontSize: 18,
+              fontWeight: 'bold',
+            }}>
+            Phone No:
+          </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              width: '76%',
+              fontWeight: '450',
+            }}>
+            {route.params?.phone}
+          </Text>
+        </View>
+
+        <View style={{flexDirection: 'row', marginTop: 20}}>
+          <Text
+            style={{
+              width: '24%',
+              fontSize: 18,
+              fontWeight: 'bold',
+            }}>
+            Address:
+          </Text>
+          <Text
+            style={{
+              fontSize: 18,
+              width: '76%',
+              fontWeight: '450',
+            }}>
+            {route.params?.address}
+          </Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Home')}
+          style={{
+            height: 40,
+            marginVertical: 100,
+
+            backgroundColor: 'white',
+          }}>
+          <Text
+            style={{
+              width: '90%',
+              alignSelf: 'center',
+              borderRadius: 20,
+              fontSize: 15,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              backgroundColor: '#5C2E7E',
+              height: 40,
+              color: 'white',
+              textAlignVertical: 'center',
+            }}>
+            Home
+          </Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

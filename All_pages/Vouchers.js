@@ -18,21 +18,20 @@ const Vouchers = ({navigation}) => {
   return (
     <ScrollView>
       <Header
-        title="Vouchers"
+        title="Categories"
         Acon={<Iiicon name="arrow-left" size={40} color="white" />}
         onPress={() => navigation.goBack()}
       />
       <View style={{backgroundColor: 'white'}}>
         <View>
           <TextInput
-            onChangeText={text => setRewards(text)}
             style={{
               padding: 10,
               borderRadius: 10,
               backgroundColor: '#EEF1FF',
               margin: 15,
             }}
-            placeholder={'Favorite show'}></TextInput>
+            placeholder={'Favorite dress'}></TextInput>
           <View style={{position: 'absolute'}}>
             <Iicon
               name="magnifying-glass"
@@ -51,7 +50,7 @@ const Vouchers = ({navigation}) => {
               color: 'black',
               marginLeft: '5%',
             }}>
-            Vouchers
+            Categories
           </Text>
         </View>
         <View style={{flexDirection: 'row'}}>
