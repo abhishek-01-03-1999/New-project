@@ -11,6 +11,8 @@ import {
   ImageBackground,
   Alert,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
+import {storeUserInformation} from '../redux/reducers/Userinformation';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   GoogleSignin,
@@ -43,9 +45,12 @@ const Log_in = ({navigation, route}) => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log(userInfo);
-      navigation.navigate('Home', {
-        Info: {},
-      });
+      dispatch(
+        storeUserInformation({
+          email: userInfo.user.email,
+        }),
+      );
+      navigation.navigate('Home');
     } catch (error) {
       console.log('Message', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -59,6 +64,8 @@ const Log_in = ({navigation, route}) => {
       }
     }
   };
+
+  const dispatch = useDispatch();
 
   const [eye, seteye] = useState(true);
 

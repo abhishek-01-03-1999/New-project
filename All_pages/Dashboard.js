@@ -18,8 +18,17 @@ import Iiicon from 'react-native-vector-icons/EvilIcons';
 import Header from './header';
 import Icon from 'react-native-vector-icons/Entypo';
 import Iicon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 const Dashboard = ({navigation}) => {
   const [data, setData] = useState([]);
+  const signOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+    } catch (error) {
+      console.error(error);
+    }
+    navigation.navigate('Log_in');
+  };
 
   return (
     <ScrollView>
@@ -219,6 +228,7 @@ const Dashboard = ({navigation}) => {
         </View>
         <View style={{marginBottom: 50}}>
           <TouchableOpacity
+            onPress={() => signOut()}
             activeOpacity={1}
             style={{
               height: 150,
