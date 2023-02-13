@@ -16,22 +16,17 @@ import LinearGradient from 'react-native-linear-gradient';
 import Iicon from 'react-native-vector-icons/Entypo';
 import Iiicon from 'react-native-vector-icons/Ionicons';
 import Header from './header';
-const Home = ({navigation, route}) => {
-  console.log(route);
+const Home = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: '#ddd'}}>
       <ScrollView>
         <Header
           title="Home"
           Acon={<Iicon name="menu" size={40} color="white" />}
-          onPress={() =>
-            navigation.navigate('Dashboard', {
-              email: route.params.email,
-            })
-          }
+          onPress={() => navigation.navigate('Dashboard')}
         />
         <View style={{backgroundColor: 'white', width: '100%'}}>
-          <View style={{height: 140, marginTop: 30}}>
+          <View style={{height: 140, marginTop: 60}}>
             <TextInput
               onChangeText={text => setRewards(text)}
               style={{
@@ -102,7 +97,13 @@ const Home = ({navigation, route}) => {
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={{width: '100%', flexDirection: 'row', height: 166}}>
+          <View
+            style={{
+              width: '100%',
+              flexDirection: 'row',
+              height: 166,
+              marginBottom: 10,
+            }}>
             <ScrollView horizontal={true}>
               <TouchableOpacity
                 onPress={() =>

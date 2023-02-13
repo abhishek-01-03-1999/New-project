@@ -207,7 +207,10 @@ const Promocode = ({navigation, route}) => {
                     </View>
 
                     <View>
-                      <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                      <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+                        Price
+                      </Text>
+                      <Text style={{fontSize: 16, fontWeight: 'bold'}}>
                         {price * quantity}
                       </Text>
                     </View>

@@ -9,28 +9,43 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import Header from './header';
-const Log_in = ({navigation}) => {
+import Home from './Home';
+const Log_in = ({navigation, route}) => {
   useEffect(() => {
     GoogleSignin.configure();
   }, []);
 
-  const [email, setEmail] = useState('');
+  const [gmail, setEmail] = useState('');
+  const [password, setpassword] = useState('');
+
+  const next = () => {
+    if (gmail.length == 0 || password.length == 0) {
+      Alert.alert(`Enter the Details`);
+    } else if (
+      (password != route.params.ppassword, gmail != route.params.eemail)
+    ) {
+      Alert.alert(`not registered email`);
+    } else {
+      navigation.navigate('Home');
+    }
+  };
 
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
-
       const userInfo = await GoogleSignin.signIn();
-      console.log('User Info --> ', userInfo);
-      //   this.setState({userInfo});
+      console.log(userInfo);
+      navigation.navigate('Home', {
+        Info: {},
+      });
     } catch (error) {
       console.log('Message', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -99,7 +114,7 @@ const Log_in = ({navigation}) => {
           </View>
           <View style={{}}>
             <TextInput
-              onChangeText={text => text}
+              onChangeText={text => setpassword(text)}
               style={{
                 padding: 10,
                 borderRadius: 10,
@@ -148,11 +163,7 @@ const Log_in = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Home', {
-                email: email,
-              })
-            }
+            onPress={() => next()}
             style={{
               backgroundColor: '#632E8F',
               height: 60,
@@ -228,7 +239,7 @@ const Log_in = ({navigation}) => {
             </View>
           </View>
           <TouchableOpacity
-            onPress={signIn}
+            onPress={() => signIn()}
             style={{
               backgroundColor: '#F78A59',
               borderRadius: 10,

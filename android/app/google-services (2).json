@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "236966674291",
+    "project_id": "abhishop-ad4ef",
+    "storage_bucket": "abhishop-ad4ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236966674291:android:7cd2cc12128a9d5998cf06",
+        "android_client_info": {
+          "package_name": "com.amanda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236966674291-sb2q8tb5ehd8iqbpvvp9ngi02s1mb4ru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amanda",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "236966674291-en8dojqm78mqtcljb423dqdm2lfg6vq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIhwh1OkXWfacgunv9ad3iLc5fb30M9Wk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236966674291-en8dojqm78mqtcljb423dqdm2lfg6vq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

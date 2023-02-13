@@ -9,10 +9,48 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
+  Alert,
 } from 'react-native';
 import Iiicon from 'react-native-vector-icons/EvilIcons';
 import Header from './header';
+import {useDispatch} from 'react-redux';
+import {storeUserInformation} from '../redux/reducers/Userinformation';
 const Create_Account = ({navigation, route}) => {
+  const [eemail, setemail] = useState('');
+  const [ppassword, setpassword] = useState('');
+  const [conpassword, setconpassword] = useState('');
+  const [phone, setphone] = useState('');
+
+  const dispatch = useDispatch();
+  const data = () => {
+    dispatch(
+      storeUserInformation({
+        email: eemail,
+        password: ppassword,
+        conpassword: conpassword,
+        phone: phone,
+      }),
+    );
+  };
+
+  const next = () => {
+    if (
+      phone.length == 0 ||
+      ppassword.length == 0 ||
+      conpassword.length == 0 ||
+      eemail.length == 0
+    ) {
+      Alert.alert(`Enter the Details`);
+    } else if (ppassword != conpassword) {
+      Alert.alert(`not matched password`);
+    } else {
+      navigation.navigate('Verification', {
+        eemail: eemail,
+        ppassword: ppassword,
+      });
+    }
+  };
+
   return (
     <ScrollView>
       <Header
@@ -39,6 +77,7 @@ const Create_Account = ({navigation, route}) => {
         </View>
         <View style={{}}>
           <TextInput
+            onChangeText={text => setphone(text)}
             style={{
               padding: 10,
               borderRadius: 10,
@@ -47,6 +86,7 @@ const Create_Account = ({navigation, route}) => {
               margin: 15,
               borderWidth: 2,
             }}
+            keyboardType={'phone-pad'}
             placeholder={'Enter phone number'}></TextInput>
         </View>
         <View
@@ -66,6 +106,7 @@ const Create_Account = ({navigation, route}) => {
         </View>
         <View style={{}}>
           <TextInput
+            onChangeText={text => setemail(text)}
             style={{
               padding: 10,
               borderRadius: 10,
@@ -94,6 +135,7 @@ const Create_Account = ({navigation, route}) => {
         </View>
         <View style={{}}>
           <TextInput
+            onChangeText={text => setpassword(text)}
             style={{
               padding: 10,
               borderRadius: 10,
@@ -122,6 +164,7 @@ const Create_Account = ({navigation, route}) => {
         </View>
         <View style={{}}>
           <TextInput
+            onChangeText={text => setconpassword(text)}
             style={{
               padding: 10,
               borderRadius: 10,
@@ -134,7 +177,9 @@ const Create_Account = ({navigation, route}) => {
         </View>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('Verification')}
+          onPress={() => {
+            next(), data();
+          }}
           style={{
             height: 100,
             marginTop: 80,

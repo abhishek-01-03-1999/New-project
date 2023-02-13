@@ -10,14 +10,16 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import Iiicon from 'react-native-vector-icons/EvilIcons';
 import Header from './header';
 
-const Reg = ({navigation, route}) => {
-  console.log(route);
+const Reg = ({navigation}) => {
   const [image, setImage] = useState(
     'https://cdn-icons-png.flaticon.com/512/149/149071.png',
   );
+  const userInfo = useSelector(state => state.userSignUpInfo.userInfo);
+  console.log(userInfo);
   return (
     <ScrollView>
       <Header
@@ -27,7 +29,7 @@ const Reg = ({navigation, route}) => {
       />
       <View style={{backgroundColor: 'white'}}>
         <Image
-          source={{uri: route.params?.image || image}}
+          source={{uri: userInfo.image || image}}
           style={{
             height: 150,
             width: 150,
@@ -43,7 +45,7 @@ const Reg = ({navigation, route}) => {
             fontWeight: 'bold',
             marginTop: 10,
           }}>
-          {route.params?.name}
+          {userInfo.name}
         </Text>
 
         <View style={{flexDirection: 'row', marginTop: 30}}>
@@ -61,7 +63,7 @@ const Reg = ({navigation, route}) => {
               width: '76%',
               fontWeight: '450',
             }}>
-            {route.params?.email}
+            {userInfo.email}
           </Text>
         </View>
         <View style={{flexDirection: 'row', marginTop: 20}}>
@@ -79,7 +81,7 @@ const Reg = ({navigation, route}) => {
               width: '76%',
               fontWeight: '450',
             }}>
-            {route.params?.phone}
+            {userInfo.phone}
           </Text>
         </View>
 
@@ -98,7 +100,7 @@ const Reg = ({navigation, route}) => {
               width: '76%',
               fontWeight: '450',
             }}>
-            {route.params?.address}
+            {userInfo.address}
           </Text>
         </View>
         <TouchableOpacity

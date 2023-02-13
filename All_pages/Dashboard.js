@@ -18,18 +18,8 @@ import Iiicon from 'react-native-vector-icons/EvilIcons';
 import Header from './header';
 import Icon from 'react-native-vector-icons/Entypo';
 import Iicon from 'react-native-vector-icons/MaterialCommunityIcons';
-const Dashboard = ({navigation, route}) => {
-  console.log(route);
+const Dashboard = ({navigation}) => {
   const [data, setData] = useState([]);
-
-  const callApi = async () => {
-    const response = await fetch(
-      'https://jsonplaceholder.typicode.com/comments?postId=1',
-    );
-    const result = await response.json();
-    console.log('>>>', result);
-    setData(result);
-  };
 
   return (
     <ScrollView>
@@ -42,11 +32,7 @@ const Dashboard = ({navigation, route}) => {
         <View style={{flexDirection: 'row'}}>
           <View>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('reg', {
-                  email: route.params.email,
-                })
-              }
+              onPress={() => navigation.navigate('reg')}
               activeOpacity={1}
               style={{
                 height: 150,
@@ -77,11 +63,7 @@ const Dashboard = ({navigation, route}) => {
           </View>
           <View>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('Edit_Profile', {
-                  email: route.params.email,
-                })
-              }
+              onPress={() => navigation.navigate('Edit_Profile')}
               activeOpacity={1}
               style={{
                 height: 150,
@@ -237,7 +219,6 @@ const Dashboard = ({navigation, route}) => {
         </View>
         <View style={{marginBottom: 50}}>
           <TouchableOpacity
-            onPress={() => callApi()}
             activeOpacity={1}
             style={{
               height: 150,

@@ -4,11 +4,6 @@ import React, {useState} from 'react';
 import {Text, View, Image, ScrollView, TouchableOpacity} from 'react-native';
 
 const Verification = ({navigation, route}) => {
-  const [name, setName] = useState('');
-  const [mob, setmob] = useState('');
-  const [password, setPasswod] = useState('');
-  const [conPassword, setconPassword] = useState('');
-
   const inputRef = React.useRef(null);
 
   return (
@@ -71,7 +66,12 @@ const Verification = ({navigation, route}) => {
             borderRadius: 20,
             marginVertical: 30,
           }}
-          onPress={() => navigation.navigate('Log_in')}>
+          onPress={() =>
+            navigation.navigate('Log_in', {
+              eemail: route.params.eemail,
+              ppassword: route.params.ppassword,
+            })
+          }>
           <Text
             style={{
               textAlign: 'center',

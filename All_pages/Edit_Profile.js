@@ -11,16 +11,18 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
+import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-crop-picker';
 import Iiicon from 'react-native-vector-icons/EvilIcons';
+import {storeUserInformation} from '../redux/reducers/Userinformation';
 import Header from './header';
-const Edit_Profile = ({navigation, route}) => {
-  console.log(route);
+const Edit_Profile = ({navigation}) => {
   const [image, setImage] = useState(
     'https://cdn-icons-png.flaticon.com/512/149/149071.png',
   );
-
+  const userInfo = useSelector(state => state.userSignUpInfo.userInfo);
   const pickImage = () => {
     ImagePicker.openPicker({
       width: 300,
@@ -34,6 +36,18 @@ const Edit_Profile = ({navigation, route}) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const dispatch = useDispatch();
+  const data = () => {
+    dispatch(
+      storeUserInformation({
+        name: name,
+        address: address,
+        image: image,
+        phone: phone,
+      }),
+      navigation.navigate('reg'),
+    );
+  };
   return (
     <ScrollView>
       <Header
@@ -84,7 +98,7 @@ const Edit_Profile = ({navigation, route}) => {
             fontSize: 18,
             fontWeight: 'bold',
           }}>
-          {route.params.email}
+          {userInfo.email}
         </Text>
       </View>
       <View
@@ -111,6 +125,7 @@ const Edit_Profile = ({navigation, route}) => {
             backgroundColor: '#EFEAD8',
           }}
           placeholder={'Username'}></TextInput>
+
         <Text
           style={{
             fontSize: 15,
@@ -159,15 +174,7 @@ const Edit_Profile = ({navigation, route}) => {
       </View>
       <View>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('reg', {
-              name: name,
-              phone: phone,
-              address: address,
-              email: route.params.email,
-              image: image,
-            })
-          }
+          onPress={() => data()}
           style={{
             height: 80,
 
